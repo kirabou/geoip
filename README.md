@@ -1,25 +1,18 @@
 # Introduction
-Provides geoip informations for an IP address, based on MaxMind GeoIP files, and 
-a REST API, inspired from Telize.com, to get geoip informations as a JSON
-structure.
+geoip is a Go package that provides geoip informations for an IP address, based on MaxMind GeoIP files, and a REST API, inspired from Telize.com, to get geoip informations as a JSON structure.
 
-All data are stored in memory for maximum speed. MaxMind files are automatically
-downloaded if the current files are older than 8 days. Initialization is made
-through `init()` and could take up to 30 seconds depending of your hardare configuration.
-Around 500MB of memory are required to store all geoip data.
+All data are stored in memory for maximum speed. MaxMind files are automatically downloaded if the current files are older than 8 days. Initialization is made through `init()` and could take up to 30 seconds depending of your hardare configuration. Around 500MB of memory are required to store all geoip data.
 
 
 # Most useful functions 
 
 - `GeoLocIPv4()` returns a GeoLocIp structure for a given IPv4 address.
 
-- `ServeHttpRequest()` provides a REST API, returning a JSON structure holding
-the geolocation information for a given IPv4 address.
+- `ServeHttpRequest()` provides a REST API, returning a JSON structure holding the geolocation information for a given IPv4 address.
 
 - `ServeGeoLocAPI()` starts a dedicated http server that only provides the REST API.
 
-- `MarshalJSON()` implements the JSON Marshaler interface for the `*GeoLocIp`
-type.
+- `MarshalJSON()` implements the JSON Marshaler interface for the `*GeoLocIp` type.
 
 
 # Contact
@@ -53,11 +46,7 @@ Distributed under the MIT licence.
 
 # Examples
 
-The following example starts an http server, listening on the 9001
-port. It returns a JSON structure with all the geoip informations.
-For example :`http://localhost:9001/54.88.55.63`
-
-returns the following JSON structure :
+The following example starts an http server, listening on the 9001 port. It returns a JSON structure with all the geoip informations. For example :`http://localhost:9001/54.88.55.63` returns the following JSON structure :
 
 ```
     { 
