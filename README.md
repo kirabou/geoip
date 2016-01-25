@@ -1,7 +1,7 @@
 # Introduction
-geoip is a Go package that provides geoip informations for an IP address, based on MaxMind GeoIP files, and a REST API, inspired from Telize.com, to get geoip informations as a JSON structure.
+geoip is a Go package that provides geoip information for an IP address, based on MaxMind GeoIP files, and a REST API, inspired from Telize.com, to get geoip information as a JSON structure.
 
-All data are stored in memory for maximum speed. MaxMind files are automatically downloaded if the current files are older than 8 days. Initialization is made through `init()` and could take up to 30 seconds depending of your hardare configuration. Around 500MB of memory are required to store all geoip data.
+All data are stored in memory for maximum speed. MaxMind files are automatically downloaded if the current files are older than 8 days. Initialization is made through `init()` and could take up to 30 seconds depending of your hardware configuration. Around 500MB of memory are required to store all geoip data.
 
 
 # Most useful functions 
@@ -17,7 +17,7 @@ All data are stored in memory for maximum speed. MaxMind files are automatically
 
 # Contact
 
-Email to : kirabou (at) gmx.com
+Email to: kirabou (at) gmx.com
 
 
 # Logging
@@ -27,14 +27,14 @@ Error and information messages are written to the local system log (syslog).
 
 # Known limitations
 
-- Currently works with IPv4 adresses only.
+- Currently works with IPv4 addresses only.
 
-- Need to be restarted to reload GeoIP files from Maxmind.
+- Need to be restarted to reload GeoIP files from MaxMind.
 
 
-# Licence
+# License
 
-Distributed under the MIT licence.
+Distributed under the MIT license.
 
 
 # Acknowledgments 
@@ -43,10 +43,34 @@ Distributed under the MIT licence.
 
 - goggle/btree package used to store and search for data in memory.
 
+# Installing and testing
+
+The package can be installed using the following command : 
+`go get github.com/kirabu/geoip`. It will install both the geoip package 
+and the google/btree package.
+
+The tests can be runned with `go test github.com/kirabu/geoip`. 
+If you check your system log (/var/log/syslog), you'll see the main
+steps followed by geoip to download the MaxMind files and load
+them into memory :
+````
+Jan 25 05:43:35  geolocip[4204]: Starting
+Jan 25 05:43:35  geolocip[4204]: Download http://download.maxmind.com/download/geoip/database/asnum/GeoIPASNum2.zip
+Jan 25 05:43:37  geolocip[4204]: Extracted /tmp/GeoIPASNum2.csv
+Jan 25 05:43:37  geolocip[4204]: Download http://geolite.maxmind.com/download/geoip/database/GeoLiteCity_CSV/GeoLiteCity-latest.zip
+Jan 25 05:43:50  geolocip[4204]: Extracted /tmp/GeoLiteCity-Blocks.csv
+Jan 25 05:43:51  geolocip[4204]: Extracted /tmp/GeoLiteCity-Location.csv
+Jan 25 05:43:51  geolocip[4204]: Locations number of lines: 751379
+Jan 25 05:43:55  geolocip[4204]: Locations file loaded
+Jan 25 05:44:04  geolocip[4204]: Blocks file loaded
+Jan 25 05:44:05  geolocip[4204]: ASN file loaded
+````
+
+
 
 # Examples
 
-The following example starts an http server, listening on the 9001 port. It returns a JSON structure with all the geoip informations. For example :`http://localhost:9001/54.88.55.63` returns the following JSON structure :
+The following example starts an http server, listening on the 9001 port. It returns a JSON structure with all the geoip information. For example :`http://localhost:9001/54.88.55.63` returns the following JSON structure :
 
 ```
     { 
@@ -71,7 +95,7 @@ Here the source code  :
     package main
     
     import (
-        "geoip"
+        "github.com/kirabou/geoip"
     )
     
     func main() {
@@ -79,13 +103,13 @@ Here the source code  :
     }
 ```
 
-The next example is a simple forever loop, waiting for an IPv4 address, and returning the geoip informations for it.
+The next example is a simple forever loop, waiting for an IPv4 address, and returning the geoip information for it.
 
 ```
 	package main
 
 	import (
-	    "geoip"
+	    "github.com/kirabou/geoip"
 	)
 
 	func main() {
